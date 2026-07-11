@@ -21,34 +21,77 @@
     <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-fuchsia-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-    <div id="authContainer" class="flex min-h-screen items-center justify-center px-4 relative z-50">
-        <div class="w-full max-w-md bg-white/[0.03] border border-white/[0.08] p-10 rounded-3xl shadow-[0_0_40px_-10px_rgba(0,0,0,0.5)] backdrop-blur-xl transform transition-all duration-500 hover:border-indigo-500/30">
-            <div class="text-center mb-10">
-                <div class="inline-flex justify-center items-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500 mb-6 shadow-lg shadow-indigo-500/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                </div>
-                <h2 id="authTitle" class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400 tracking-tight">Welcome Back</h2>
-                <p id="authSubtitle" class="text-sm text-slate-400 mt-2">Sign in to your photography workspace.</p>
-            </div>
-            
-            <form id="authForm" class="space-y-5">
-                <div class="space-y-1">
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Email Address</label>
-                    <input type="email" id="authEmail" placeholder="hello@studio.com" required class="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all duration-300">
-                </div>
-                <div class="space-y-1">
-                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400">Password</label>
-                    <input type="password" id="authPassword" placeholder="••••••••" required class="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all duration-300">
-                </div>
-                <button type="submit" id="btnAuthSubmit" class="w-full bg-gradient-to-r from-indigo-500 via-indigo-600 to-fuchsia-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 mt-4">
-                    Access Workspace
-                </button>
-            </form>
+    <div id="authContainer" class="flex min-h-screen relative z-50 overflow-hidden">
 
-            <div class="text-center mt-8 pt-6 border-t border-white/[0.05]">
-                <button id="btnToggleAuth" class="text-xs font-medium text-slate-400 hover:text-indigo-400 transition-colors">Don't have an account? <span class="text-indigo-400 underline decoration-indigo-400/30 underline-offset-4">Sign up for free</span></button>
+        <div class="w-full lg:w-[45%] flex items-center justify-center px-6 sm:px-12 bg-[#0b1120]/80 backdrop-blur-md relative z-20 border-r border-white/[0.03]">
+            <div class="w-full max-w-md bg-white/[0.02] border border-white/[0.06] p-8 sm:p-10 rounded-3xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.7)] backdrop-blur-xl transition-all duration-500 hover:border-indigo-500/20">
+                <div class="text-center mb-8">
+                    <div class="inline-flex justify-center items-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500 mb-4 shadow-lg shadow-indigo-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <h2 id="authTitle" class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 tracking-tight">Welcome Back</h2>
+                    <p id="authSubtitle" class="text-xs text-slate-400 mt-1.5">Sign in to your photography workspace.</p>
+                </div>
+                
+                <form id="authForm" class="space-y-4">
+                    <div class="space-y-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Email Address</label>
+                        <input type="email" id="authEmail" placeholder="hello@studio.com" required class="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all duration-300">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Password</label>
+                        <input type="password" id="authPassword" placeholder="••••••••" required class="w-full bg-slate-900/50 border border-slate-700/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all duration-300">
+                    </div>
+                    <button type="submit" id="btnAuthSubmit" class="w-full bg-gradient-to-r from-indigo-500 via-indigo-600 to-fuchsia-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200 mt-2 text-sm">
+                        Access Workspace
+                    </button>
+                </form>
+
+                <div class="text-center mt-6 pt-5 border-t border-white/[0.04]">
+                    <button id="btnToggleAuth" class="text-xs font-medium text-slate-400 hover:text-indigo-400 transition-colors">Don't have an account? <span class="text-indigo-400 underline decoration-indigo-400/30 underline-offset-4">Sign up for free</span></button>
+                </div>
             </div>
         </div>
+
+        <div class="hidden lg:flex w-[55%] flex-col justify-between p-16 relative z-10 bg-gradient-to-br from-[#0f172a] via-[#0b1120] to-[#020617]">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+            <div class="absolute top-1/4 right-1/4 w-72 h-72 bg-fuchsia-500/10 rounded-full blur-[100px]"></div>
+            
+            <div class="relative z-20 flex items-center space-x-2 opacity-80">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-indigo-400">Next-Gen Studio Software</span>
+            </div>
+
+            <div class="relative z-20 my-auto max-w-lg">
+                <h1 class="text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                    Manage your studio <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400">without the chaos.</span>
+                </h1>
+                <p class="text-slate-400 text-sm leading-relaxed mb-8">
+                    LensBook Pro memberikan kemudahan operasional menyeluruh untuk fotografer profesional dalam mengelola antrean jadwal, pencatatan transaksi uang muka (DP), hingga monitor pembayaran real-time dalam satu dasbor workspace terpadu.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-white/[0.01] border border-white/[0.04] rounded-2xl">
+                        <div class="text-xs font-bold text-white mb-1 flex items-center space-x-2">
+                            <span class="text-indigo-400">✦</span> <span>Real-time Operations</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500">Sinkronisasi instan ke server database cloud Supabase.</p>
+                    </div>
+                    <div class="p-4 bg-white/[0.01] border border-white/[0.04] rounded-2xl">
+                        <div class="text-xs font-bold text-white mb-1 flex items-center space-x-2">
+                            <span class="text-fuchsia-400">✦</span> <span>Secure Auth Gateway</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500">Akses workspace terproteksi bagi multi-user manajemen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative z-20 flex justify-between items-center text-[11px] text-slate-500 border-t border-white/[0.04] pt-6">
+                <div>© 2026 LensBook Pro Workspace.</div>
+                <div>All features unlocked.</div>
+            </div>
+        </div>    
     </div>
 
     <div id="dashboardContainer" class="hidden relative z-10">
