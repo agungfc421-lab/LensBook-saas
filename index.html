@@ -221,7 +221,7 @@
                                     <th class="py-4 px-4 text-center">Status</th>
                                     <th class="py-4 px-4 text-center">Aksi</th>
                                 </tr>
-                            </thead>
+                            </table>
                             <tbody id="bookingTableBody" class="text-sm divide-y divide-white/[0.02]">
                             </tbody>
                         </table>
@@ -234,7 +234,14 @@
     <script>
         const SUPABASE_URL = "https://ieiahjgdmzjccgtafiij.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_Z_5GK-yN4tJ_0XmexiQVIA_oXY8r8Wk";
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let _supabase;
+
+        // Proteksi inisialisasi library Supabase agar aman di Mobile Chrome
+        try {
+            _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (err) {
+            console.error("Supabase CDN failed to initialize:", err);
+        }
 
         let isLoginMode = true;
 
@@ -255,9 +262,13 @@
         });
 
         async function checkSession() {
+            if (!_supabase) return;
             const { data } = await _supabase.auth.getSession();
-            if (data.session) { showDashboard(data.session.user.email); } 
-            else { showAuth(); }
+            if (data && data.session) { 
+                showDashboard(data.session.user.email); 
+            } else { 
+                showAuth(); 
+            }
         }
 
         function showDashboard(email) {
@@ -274,27 +285,39 @@
 
         authForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!_supabase) {
+                alert("Koneksi Database bermasalah. Periksa koneksi internet Anda.");
+                return;
+            }
+
             const btn = document.getElementById('btnAuthSubmit');
             const originalText = btn.innerText;
             btn.innerText = "Processing...";
             
-            const email = document.getElementById('authEmail').value;
+            const email = document.getElementById('authEmail').value.trim();
             const password = document.getElementById('authPassword').value;
 
             if (isLoginMode) {
                 const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
-                if (error) alert("Gagal Login: " + error.message);
-                else showDashboard(data.user.email);
+                if (error) {
+                    alert("Gagal Login: " + error.message + "\n(Pastikan email terdaftar & konfirmasi email sudah aktif)");
+                    btn.innerText = originalText;
+                } else {
+                    showDashboard(data.user.email);
+                }
             } else {
                 const { data, error } = await _supabase.auth.signUp({ email, password });
-                if (error) alert("Gagal Registrasi: " + error.message);
-                else alert("Pendaftaran Berhasil! Silakan cek kotak masuk/spam email Anda untuk konfirmasi.");
+                if (error) {
+                    alert("Gagal Registrasi: " + error.message);
+                } else {
+                    alert("Pendaftaran Berhasil! Silakan cek kotak masuk/spam email Anda untuk melakukan klik link verifikasi.");
+                }
+                btn.innerText = originalText;
             }
-            btn.innerText = originalText;
         });
 
         async function handleLogout() {
-            await _supabase.auth.signOut();
+            if (_supabase) await _supabase.auth.signOut();
             showAuth();
         }
 
@@ -303,9 +326,14 @@
         const bookingTableBody = document.getElementById('bookingTableBody');
 
         async function fetchBookings() {
+            if (!_supabase) return;
             bookingTableBody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-500 text-xs">Memuat data dari database cloud...</td></tr>';
+            
             let { data: bookings, error } = await _supabase.from('bookings').select('*').order('tanggal_foto', { ascending: true });
-            if (error) return;
+            if (error) {
+                bookingTableBody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-rose-400 text-xs">Gagal memuat tabel database. Pastikan tabel RLS Supabase diizinkan.</td></tr>';
+                return;
+            }
 
             document.getElementById('statTotal').innerText = bookings.length;
             document.getElementById('statPending').innerText = bookings.filter(b => b.status_pembayaran !== 'Lunas Total').length;
@@ -343,6 +371,7 @@
 
         bookingForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!_supabase) return;
             const btn = e.target.querySelector('button[type="submit"]');
             btn.innerText = "Menyimpan...";
             
@@ -359,18 +388,22 @@
         });
 
         async function updateStatus(id) {
-            await _supabase.from('bookings').update({ status_pembayaran: 'Lunas Total' }).eq('id', id);
-            fetchBookings();
+            if (_supabase) {
+                await _supabase.from('bookings').update({ status_pembayaran: 'Lunas Total' }).eq('id', id);
+                fetchBookings();
+            }
         }
 
         async function deleteBooking(id) {
-            if (confirm('Yakin ingin membatalkan dan menghapus booking ini?')) {
+            if (_supabase && confirm('Yakin ingin membatalkan dan menghapus booking ini?')) {
                 await _supabase.from('bookings').delete().eq('id', id);
                 fetchBookings();
             }
         }
 
-        checkSession();
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(checkSession, 500);
+        });
     </script>
 </body>
 </html>
