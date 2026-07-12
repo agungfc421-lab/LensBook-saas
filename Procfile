@@ -1,0 +1,1 @@
+web: npx serve -s resources/views -l $PORT
