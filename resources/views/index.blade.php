@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LensBook Pro - Premium Management</title>
+    <title>LensBook - Premium Management</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -68,7 +68,7 @@
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400">without the chaos.</span>
                 </h1>
                 <p class="text-slate-400 text-sm leading-relaxed mb-8">
-                    LensBook Pro memberikan kemudahan operasional menyeluruh untuk fotografer profesional dalam mengelola antrean jadwal, pencatatan transaksi uang muka (DP), hingga monitor pembayaran real-time dalam satu dasbor workspace terpadu.
+                    LensBook memberikan kemudahan operasional menyeluruh untuk fotografer profesional dalam mengelola antrean jadwal, pencatatan transaksi uang muka (DP), hingga monitor pembayaran real-time dalam satu dasbor workspace terpadu.
                 </p>
 
                 <div class="grid grid-cols-2 gap-4">
@@ -88,7 +88,7 @@
             </div>
 
             <div class="relative z-20 flex justify-between items-center text-[11px] text-slate-500 border-t border-white/[0.04] pt-6">
-                <div>© 2026 LensBook Pro Workspace.</div>
+                <div>© 2026 LensBook Workspace.</div>
                 <div>All features unlocked.</div>
             </div>
         </div>    
@@ -107,7 +107,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">LensBook <span class="text-indigo-400 font-extrabold text-sm tracking-widest uppercase ml-1">Pro</span></h1>
+                            <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300">LensBook</h1>
                             <div class="flex items-center space-x-2 mt-0.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
                                 <p class="text-[10px] font-medium text-emerald-400/80 tracking-wider uppercase">Live Database Active</p>
