@@ -1,0 +1,11 @@
+[providers]
+providers = ["node"]
+
+[phases.setup]
+nixPkgs = ["nodePackages.serve"]
+
+[phases.build]
+cmds = ["echo 'Skipping Laravel build completely'"]
+
+[start]
+cmd = "serve -s resources/views -l $PORT"
